@@ -14,7 +14,7 @@ class AuthSourceLdapPasswd < AuthSourceLdap
         ldap_con = initialize_ldap_con(self.account, self.account_password)
       end
 
-      ops = [[:replace, :unicodePwd, AuthSourceLdapPasswd.str2unicodePwd(new_password)]]
+      ops = [[:replace, :userPassword, new_password]]
       ldap_con.modify :dn => attrs[:dn], :operations => ops
 
       result = ldap_con.get_operation_result
